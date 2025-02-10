@@ -1,4 +1,4 @@
-package com.khadri.spring.core.csv.prepare.data.driver;
+package com.khadri.spring.core.csv.prepare.data.drivertypes;
 
 public enum DriverTypes {
 	STUDENT(1, "student"), EMPLOYEE(2, "employee"), CUSTOMER(3, "customer"), SUPER_MARKET(4, "supermarket"),

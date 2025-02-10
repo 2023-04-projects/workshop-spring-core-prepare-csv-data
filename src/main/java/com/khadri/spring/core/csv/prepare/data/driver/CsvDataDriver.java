@@ -11,6 +11,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import com.khadri.spring.core.csv.prepare.data.config.AppConfig;
 import com.khadri.spring.core.csv.prepare.data.customer.processor.CustomerDataProcessor;
 import com.khadri.spring.core.csv.prepare.data.customer.util.CustomerFileUtil;
+import com.khadri.spring.core.csv.prepare.data.drivertypes.DriverTypes;
 
 import io.vavr.Tuple2;
 
@@ -19,15 +20,15 @@ public class CsvDataDriver {
 	private static CustomerDataProcessor customerDataProcessor;
 	private static Scanner scanner;
 	private static CsvDataDriver csvDriver;
+	private static ApplicationContext applicationContext;
 
 	{
-		ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
+		applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
 
-		scanner = (Scanner) applicationContext.getBean("scanner");
+		scanner = applicationContext.getBean(Scanner.class);
 
-		customerDataProcessor = (CustomerDataProcessor) applicationContext.getBean("customerDataProcessor");
+		customerDataProcessor = applicationContext.getBean(CustomerDataProcessor.class);
 
-		// ((AnnotationConfigApplicationContext) applicationContext).close();
 	}
 
 	public static void main(String[] args) {
@@ -41,6 +42,7 @@ public class CsvDataDriver {
 		});
 
 		csvDriver.process();
+
 	}
 
 	private void process() {
@@ -50,7 +52,8 @@ public class CsvDataDriver {
 		switch (dataProcessId) {
 
 		case 3:
-			Tuple2<File, PrintWriter> tupleFilePW2 = CustomerFileUtil.customerCsvFilePrintWriter();
+
+			Tuple2<File, PrintWriter> tupleFilePW2 = CustomerFileUtil.customerCsvFilePrintWriter(applicationContext);
 
 			try {
 				System.out.println(" How many records you want to enter ?  : ");
@@ -72,6 +75,7 @@ public class CsvDataDriver {
 			break;
 		}
 
+		((AnnotationConfigApplicationContext) applicationContext).close();
 	}
 
 }

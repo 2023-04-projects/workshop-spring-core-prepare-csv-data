@@ -1,17 +1,13 @@
 package com.khadri.spring.core.csv.prepare.data.customer.util;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Arrays;
-import java.util.Scanner;
 
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
 
-import com.khadri.spring.core.csv.prepare.data.config.AppConfig;
 import com.khadri.spring.core.csv.prepare.data.customer.constants.CustomerCsvHeaders;
 
 import io.vavr.Tuple;
@@ -21,22 +17,17 @@ import io.vavr.Tuple2;
 public class CustomerFileUtil {
 	public static PrintWriter printWriter;
 	public static File file;
-	public static Scanner scanner;
 
-	public static Tuple2<File, PrintWriter> customerCsvFilePrintWriter() {
+	public static Tuple2<File, PrintWriter> customerCsvFilePrintWriter(ApplicationContext applicationContext ) {
 		System.out.println("===========> CUSTOMER CSV File Creation  STARTS ===========>");
 
 		try {
-			ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
 
-			scanner = (Scanner) applicationContext.getBean("scanner");
-
-			file = (File) applicationContext.getBean("file");
-
+			file = applicationContext.getBean(File.class);
+			printWriter = applicationContext.getBean(PrintWriter.class);
 			System.out.println(file);
 
 			boolean isNewFile = file.createNewFile();
-			printWriter = new PrintWriter(new FileWriter(file, true));
 
 			if (isNewFile) {
 				System.out.println("File is new, writing header...");
