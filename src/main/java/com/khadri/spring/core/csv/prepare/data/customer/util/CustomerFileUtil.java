@@ -6,19 +6,17 @@ import java.io.PrintWriter;
 import java.util.Arrays;
 
 import org.springframework.context.ApplicationContext;
-import org.springframework.stereotype.Component;
 
 import com.khadri.spring.core.csv.prepare.data.customer.constants.CustomerCsvHeaders;
 
 import io.vavr.Tuple;
 import io.vavr.Tuple2;
 
-@Component
 public class CustomerFileUtil {
 	public static PrintWriter printWriter;
 	public static File file;
 
-	public static Tuple2<File, PrintWriter> customerCsvFilePrintWriter(ApplicationContext applicationContext ) {
+	public static Tuple2<File, PrintWriter> customerCsvFilePrintWriter(ApplicationContext applicationContext) {
 		System.out.println("===========> CUSTOMER CSV File Creation  STARTS ===========>");
 
 		try {

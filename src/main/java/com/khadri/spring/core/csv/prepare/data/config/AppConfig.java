@@ -12,28 +12,26 @@ import com.khadri.spring.core.csv.prepare.data.customer.processor.CustomerDataPr
 
 @Configuration
 public class AppConfig {
-	
+
 	@Bean
 	public Scanner scanner() {
 		return new Scanner(System.in);
 	}
-	
+
 	@Bean
 	public File file() {
 		return new File("src/main/resources/customer.csv");
 	}
-	 
+
 	@Bean
-	public PrintWriter printWriter(File file) throws Exception  {
-		FileWriter fileWriter=new FileWriter(file, true);
-       return new PrintWriter(fileWriter);
-}
-	
+	public PrintWriter printWriter(File file) throws Exception {
+		FileWriter fileWriter = new FileWriter(file, true);
+		return new PrintWriter(fileWriter);
+	}
+
 	@Bean
 	public CustomerDataProcessor customerDataProcessor() {
-		return new CustomerDataProcessor(scanner());	
+		return new CustomerDataProcessor(scanner());
 	}
-	
-
 
 }

@@ -3,8 +3,7 @@ package com.khadri.spring.core.csv.prepare.data.customer.processor;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-
-public class CustomerDataProcessor{
+public class CustomerDataProcessor {
 	private Scanner scanner;
 
 	public CustomerDataProcessor(Scanner scanner) {
@@ -30,7 +29,7 @@ public class CustomerDataProcessor{
 		System.out.println("===========> CUSTOMER " + recordNumber + " DATA WRITING INTO CSV File STARTS ===========>");
 		System.out.println("Processing  File Wrting ");
 
-		//pw.println();// new empty row
+		// pw.println();// new empty row
 		String line = id + "," + name + "," + address + "," + phone_Num;
 		pw.println(line);
 
