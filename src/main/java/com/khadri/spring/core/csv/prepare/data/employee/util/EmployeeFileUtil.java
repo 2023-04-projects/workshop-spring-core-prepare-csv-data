@@ -1,6 +1,7 @@
 package com.khadri.spring.core.csv.prepare.data.employee.util;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Arrays;
@@ -19,9 +20,9 @@ public class EmployeeFileUtil {
 	public static Tuple2<File, PrintWriter> employeeCsvFilePrintWriter(ApplicationContext applicationContext) {
 		System.out.println("===========> Employee CSV File Creation  STARTS ===========>");
 		try {
-			employeeFile =(File) applicationContext.getBean("employeeFile");
-			printWriter = (PrintWriter)applicationContext.getBean("printWriter");
+			employeeFile = (File) applicationContext.getBean("employeeFile");
 			boolean isNewFile = employeeFile.createNewFile();
+			printWriter = new PrintWriter(new FileWriter(employeeFile, true));
 
 			if (isNewFile) {
 				System.out.println("File is new, writing header...");
@@ -48,7 +49,7 @@ public class EmployeeFileUtil {
 		System.out.println("File Name : " + employeeFile.getName() + " Created At : " + employeeFile.getPath());
 
 		System.out.println("<=========== EMPLOYEE CSV File Creation ENDS <===========");
-		
+
 		return Tuple.of(employeeFile, printWriter);
 	}
 }

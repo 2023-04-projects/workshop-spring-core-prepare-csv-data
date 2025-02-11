@@ -11,7 +11,7 @@ public class EmployeeDataProcessor  {
 		this.scanner = scanner;
 	}
 
-	public void process(PrintWriter pw, int recordNumber) {
+	public void process(PrintWriter printWriter, int recordNumber) {
 		System.out.println("===========> EMPLOYEE " + recordNumber + " DATA READING STARTS ===========>");
 		System.out.println("Enter Employee Id : ");
 		int id = scanner.nextInt();
@@ -32,7 +32,7 @@ public class EmployeeDataProcessor  {
 		System.out.println("Processing  File Wrting ");
 		
 		String line = id + "," + name + "," + desigination + "," + salary ;
-		pw.println(line);
+		printWriter.println(line);
 
 	}
 }
