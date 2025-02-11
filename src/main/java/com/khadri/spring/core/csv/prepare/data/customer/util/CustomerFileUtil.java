@@ -21,9 +21,8 @@ public class CustomerFileUtil {
 
 		try {
 
-			customerFile = applicationContext.getBean(File.class);
-			printWriter = applicationContext.getBean(PrintWriter.class);
-			System.out.println(customerFile);
+			customerFile = (File) applicationContext.getBean("customerFile");
+			printWriter = (PrintWriter) applicationContext.getBean("printWriter");
 
 			boolean isNewFile = customerFile.createNewFile();
 
