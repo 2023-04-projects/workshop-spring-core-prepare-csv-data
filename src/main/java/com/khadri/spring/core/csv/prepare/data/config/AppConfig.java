@@ -19,7 +19,7 @@ public class AppConfig {
 	}
 
 	@Bean
-	public File file() {
+	public File customerFile() {
 		return new File("src/main/resources/customer.csv");
 	}
 

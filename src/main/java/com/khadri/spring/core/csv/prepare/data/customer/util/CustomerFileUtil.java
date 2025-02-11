@@ -14,18 +14,18 @@ import io.vavr.Tuple2;
 
 public class CustomerFileUtil {
 	public static PrintWriter printWriter;
-	public static File file;
+	public static File customerFile;
 
 	public static Tuple2<File, PrintWriter> customerCsvFilePrintWriter(ApplicationContext applicationContext) {
 		System.out.println("===========> CUSTOMER CSV File Creation  STARTS ===========>");
 
 		try {
 
-			file = applicationContext.getBean(File.class);
+			customerFile = applicationContext.getBean(File.class);
 			printWriter = applicationContext.getBean(PrintWriter.class);
-			System.out.println(file);
+			System.out.println(customerFile);
 
-			boolean isNewFile = file.createNewFile();
+			boolean isNewFile = customerFile.createNewFile();
 
 			if (isNewFile) {
 				System.out.println("File is new, writing header...");
@@ -51,14 +51,14 @@ public class CustomerFileUtil {
 			System.out.println("never comes");
 		}
 
-		System.out.println("File Name : " + file.getName() + " Created At : " + file.getPath());
+		System.out.println("File Name : " + customerFile.getName() + " Created At : " + customerFile.getPath());
 		System.out.println("<=========== CUSTOMER CSV File Creation ENDS <===========");
 
 		System.out.println("===========> CUSTOMER HEADER ROW WRITING INTO CSV File STARTS ===========>");
 
 		System.out.println("<=========== CUSTOMER HEADER ROW WRITING INTO CSV File ENDS <===========");
 
-		return Tuple.of(file, printWriter);
+		return Tuple.of(customerFile, printWriter);
 	}
 
 }
