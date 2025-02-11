@@ -54,10 +54,6 @@ public class CustomerFileUtil {
 		System.out.println("File Name : " + customerFile.getName() + " Created At : " + customerFile.getPath());
 		System.out.println("<=========== CUSTOMER CSV File Creation ENDS <===========");
 
-		System.out.println("===========> CUSTOMER HEADER ROW WRITING INTO CSV File STARTS ===========>");
-
-		System.out.println("<=========== CUSTOMER HEADER ROW WRITING INTO CSV File ENDS <===========");
-
 		return Tuple.of(customerFile, printWriter);
 	}
 
