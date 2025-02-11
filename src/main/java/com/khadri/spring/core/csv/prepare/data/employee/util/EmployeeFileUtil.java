@@ -13,23 +13,23 @@ import io.vavr.Tuple;
 import io.vavr.Tuple2;
 
 public class EmployeeFileUtil {
-	private static PrintWriter pw;
+	private static PrintWriter printWriter;
 	private static File employeeFile;
 
 	public static Tuple2<File, PrintWriter> employeeCsvFilePrintWriter(ApplicationContext applicationContext) {
 		System.out.println("===========> Employee CSV File Creation  STARTS ===========>");
 		try {
 			employeeFile =(File) applicationContext.getBean("employeeFile");
-			pw = (PrintWriter)applicationContext.getBean("pw");
+			printWriter = (PrintWriter)applicationContext.getBean("printWriter");
 			boolean isNewFile = employeeFile.createNewFile();
 
 			if (isNewFile) {
 				System.out.println("File is new, writing header...");
 				Arrays.stream(EmployeeCsvHeaders.values()).forEach(eachHeader -> {
-					pw.print(eachHeader.name());
-					pw.print(",");
+					printWriter.print(eachHeader.name());
+					printWriter.print(",");
 				});
-				pw.println(",");
+				printWriter.println(",");
 			} else {
 				System.out.println("File already exists, skipping header...");
 			}
@@ -49,6 +49,6 @@ public class EmployeeFileUtil {
 
 		System.out.println("<=========== EMPLOYEE CSV File Creation ENDS <===========");
 		
-		return Tuple.of(employeeFile, pw);
+		return Tuple.of(employeeFile, printWriter);
 	}
 }
