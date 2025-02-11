@@ -19,7 +19,7 @@ public class AppConfig {
 	}
 
 	@Bean
-	public File file() {
+	public File mobileFile() {
 		return new File("src/main/resources/mobile.csv");
 	}
 

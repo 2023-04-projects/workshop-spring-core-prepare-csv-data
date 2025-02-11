@@ -14,24 +14,23 @@ import io.vavr.Tuple2;
 
 public class MobileFileUtil {
 
-	private static PrintWriter pw;
-	private static File file;
+	private static PrintWriter printWriter;
+	private static File mobileFile;
 
 	public static Tuple2<File, PrintWriter> mobileCsvFilePrintWriter(ApplicationContext applicationContext) {
 		System.out.println("===========> MOBILE CSV File Creation  STARTS ===========>");
 
 		try {
-			file = applicationContext.getBean(File.class);
-			pw = applicationContext.getBean(PrintWriter.class);
-			System.out.println(file);
-			boolean isNewFile = file.createNewFile();
+			mobileFile = (File) applicationContext.getBean("mobileFile");
+			printWriter = (PrintWriter) applicationContext.getBean("printWriter");
+			boolean isNewFile = mobileFile.createNewFile();
 			if (isNewFile) {
 				System.out.println("File is new, writing header...");
 				Arrays.stream(MobileCsvHeaders.values()).forEach(eachHeader -> {
-					pw.print(eachHeader.name());
-					pw.print(",");
+					printWriter.print(eachHeader.name());
+					printWriter.print(",");
 				});
-				pw.println(",");
+				printWriter.println(",");
 			} else {
 				System.out.println("File already exists, skipping header...");
 			}
@@ -50,16 +49,10 @@ public class MobileFileUtil {
 			System.out.println("never comes");
 		}
 
-		System.out.println("File Name : " + file.getName() + " Created At : " + file.getPath());
+		System.out.println("File Name : " + mobileFile.getName() + " Created At : " + mobileFile.getPath());
 		System.out.println("<=========== MOBILE CSV File Creation ENDS <===========");
 
-		System.out.println("===========> MOBILE HEADER ROW WRITING INTO CSV File STARTS ===========>");
-
-		// System.out.println("Process of Writing Headers into : " + file.getName());
-
-		System.out.println("<=========== MOBILE HEADER ROW WRITING INTO CSV File ENDS <===========");
-
-		return Tuple.of(file, pw);
+		return Tuple.of(mobileFile, printWriter);
 	}
 
 }

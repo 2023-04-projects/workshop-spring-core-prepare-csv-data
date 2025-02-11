@@ -37,9 +37,7 @@ public class MobileDataProcessor {
 
 		pw.println(line);
 
-		System.out.println();
 		System.out.println("<=========== MOBILE " + recordNumber + " DATA WRITING INTO CSV File ENDS <===========");
-
 	}
 
 }
