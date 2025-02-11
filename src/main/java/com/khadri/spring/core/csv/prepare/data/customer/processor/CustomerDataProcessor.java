@@ -29,11 +29,9 @@ public class CustomerDataProcessor {
 		System.out.println("===========> CUSTOMER " + recordNumber + " DATA WRITING INTO CSV File STARTS ===========>");
 		System.out.println("Processing  File Wrting ");
 
-		// pw.println();// new empty row
 		String line = id + "," + name + "," + address + "," + phone_Num;
 		pw.println(line);
 
-		System.out.println();
 		System.out.println("<=========== CUSTOMER " + recordNumber + " DATA WRITING INTO CSV File ENDS <===========");
 
 	}
