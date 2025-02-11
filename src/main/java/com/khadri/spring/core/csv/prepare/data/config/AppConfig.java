@@ -24,8 +24,8 @@ public class AppConfig {
 	}
 
 	@Bean
-	public PrintWriter printWriter(File file) throws Exception {
-		FileWriter fileWriter = new FileWriter(file, true);
+	public PrintWriter printWriter(File mobileFile) throws Exception {
+		FileWriter fileWriter = new FileWriter(mobileFile, true);
 		return new PrintWriter(fileWriter);
 	}
 
