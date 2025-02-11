@@ -18,7 +18,7 @@ public class AppConfig {
 	}
 
 	@Bean
-	public File file() {
+	public File employeeFile() {
 		return new File("src/main/resources/employee.csv");
 	}
 
