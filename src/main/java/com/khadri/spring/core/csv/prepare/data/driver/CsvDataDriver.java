@@ -4,20 +4,25 @@ import java.io.File;
 import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Scanner;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 import com.khadri.spring.core.csv.prepare.data.config.AppConfig;
-import com.khadri.spring.core.csv.prepare.data.employee.processor.EmployeeDataProcessor;
-import com.khadri.spring.core.csv.prepare.data.employee.util.EmployeeFileUtil;
 import com.khadri.spring.core.csv.prepare.data.customer.processor.CustomerDataProcessor;
 import com.khadri.spring.core.csv.prepare.data.customer.util.CustomerFileUtil;
 import com.khadri.spring.core.csv.prepare.data.drivertypes.DriverTypes;
+import com.khadri.spring.core.csv.prepare.data.employee.processor.EmployeeDataProcessor;
+import com.khadri.spring.core.csv.prepare.data.employee.util.EmployeeFileUtil;
+import com.khadri.spring.core.csv.prepare.data.movie.processor.MovieDataProcessor;
+import com.khadri.spring.core.csv.prepare.data.movie.util.MovieFileUtil;
 
 import io.vavr.Tuple2;
 
 public class CsvDataDriver {
 	private static CustomerDataProcessor customerDataProcessor;
 	private static EmployeeDataProcessor employeeDataProcessor;
+	private static MovieDataProcessor movieDataProcessor;
 	private static Scanner scanner;
 	private static CsvDataDriver csvDriver;
 	private static ApplicationContext applicationContext;
@@ -27,6 +32,7 @@ public class CsvDataDriver {
 		scanner = applicationContext.getBean(Scanner.class);
 		employeeDataProcessor = applicationContext.getBean(EmployeeDataProcessor.class);
 		customerDataProcessor = applicationContext.getBean(CustomerDataProcessor.class);
+		movieDataProcessor = applicationContext.getBean(MovieDataProcessor.class);
 	}
 
 	public static void main(String[] args) {
@@ -81,6 +87,29 @@ public class CsvDataDriver {
 				tupleFilePW2._2.flush();
 				tupleFilePW2._2.close();
 			}
+			break;
+
+		case 5:
+			MovieDataProcessor dataProcessor = new MovieDataProcessor(scanner);
+			Tuple2<File, PrintWriter> tupleFilePW5 = MovieFileUtil.movieCsvFilePrintWriter(applicationContext);
+			try {
+				System.out.println(" How many records you want to enter ?  : ");
+				int movieRecords = scanner.nextInt();
+
+				for (int i = 0; i < movieRecords; i++) {
+					dataProcessor.process(tupleFilePW5._2, i);
+
+				}
+
+			} catch (Exception e) {
+				System.out.println("Exception Occured " + e.getCause());
+			} finally {
+				System.out.println("The remaining records were inserted into file. ");
+				tupleFilePW5._2.flush();
+				tupleFilePW5._2.close();
+
+			}
+
 			break;
 
 		default:
