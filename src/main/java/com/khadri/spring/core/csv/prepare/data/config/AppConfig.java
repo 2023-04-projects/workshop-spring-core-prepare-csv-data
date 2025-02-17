@@ -16,6 +16,7 @@ import com.khadri.spring.core.csv.prepare.data.movie.processor.MovieDataProcesso
 
 @Configuration
 public class AppConfig {
+
 	@Bean
 	public Scanner scanner() {
 		return new Scanner(System.in);
@@ -38,7 +39,6 @@ public class AppConfig {
 		String movieFilePath = "src/main/resources/movie.csv";
 		return new File(movieFilePath);
 	}
-
 
 	@Bean
 	public PrintWriter printWriterEmployee(@Qualifier("employeeFile") File employeeFile) throws IOException {

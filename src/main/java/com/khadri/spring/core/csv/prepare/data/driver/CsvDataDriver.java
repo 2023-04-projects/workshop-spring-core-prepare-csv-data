@@ -20,6 +20,7 @@ import com.khadri.spring.core.csv.prepare.data.movie.util.MovieFileUtil;
 import io.vavr.Tuple2;
 
 public class CsvDataDriver {
+
 	private static CustomerDataProcessor customerDataProcessor;
 	private static EmployeeDataProcessor employeeDataProcessor;
 	private static MovieDataProcessor movieDataProcessor;
@@ -90,14 +91,13 @@ public class CsvDataDriver {
 			break;
 
 		case 5:
-			MovieDataProcessor dataProcessor = new MovieDataProcessor(scanner);
 			Tuple2<File, PrintWriter> tupleFilePW5 = MovieFileUtil.movieCsvFilePrintWriter(applicationContext);
 			try {
 				System.out.println(" How many records you want to enter ?  : ");
 				int movieRecords = scanner.nextInt();
 
 				for (int i = 0; i < movieRecords; i++) {
-					dataProcessor.process(tupleFilePW5._2, i);
+					movieDataProcessor.process(tupleFilePW5._2, i);
 
 				}
 
