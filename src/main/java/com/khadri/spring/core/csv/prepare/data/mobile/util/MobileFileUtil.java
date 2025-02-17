@@ -22,7 +22,7 @@ public class MobileFileUtil {
 
 		try {
 			mobileFile = (File) applicationContext.getBean("mobileFile");
-			printWriter = (PrintWriter) applicationContext.getBean("printWriter");
+			printWriter = (PrintWriter) applicationContext.getBean("printWriterMobile");
 			boolean isNewFile = mobileFile.createNewFile();
 			if (isNewFile) {
 				System.out.println("File is new, writing header...");

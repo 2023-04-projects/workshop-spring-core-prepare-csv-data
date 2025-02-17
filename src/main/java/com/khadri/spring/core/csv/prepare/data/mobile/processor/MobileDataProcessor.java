@@ -25,14 +25,11 @@ public class MobileDataProcessor {
 
 		System.out.println("Processing MOBILE DATA");
 
-		System.out.println("Processing MOBILE DETAILS");
-
 		System.out.println("<=========== MOBILE " + recordNumber + " DATA READING ENDS <===========");
 
 		System.out.println("===========> MOBILE" + recordNumber + " DATA WRITING INTO CSV File STARTS ===========>");
 		System.out.println("Processing  File Wrting ");
 
-		// pw.println();// new empty row
 		String line = id + "," + name + "," + price;
 
 		pw.println(line);

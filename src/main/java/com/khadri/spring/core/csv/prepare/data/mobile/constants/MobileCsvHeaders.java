@@ -13,5 +13,4 @@ public enum MobileCsvHeaders {
 	public int getId() {
 		return id;
 	}
-
 }
