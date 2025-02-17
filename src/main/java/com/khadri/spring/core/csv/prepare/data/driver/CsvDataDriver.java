@@ -9,7 +9,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.khadri.spring.core.csv.prepare.data.config.AppConfig;
-import com.khadri.spring.core.csv.prepare.data.driver.types.DriverTypes;
+import com.khadri.spring.core.csv.prepare.data.drivertypes.DriverTypes;
 import com.khadri.spring.core.csv.prepare.data.mobile.processor.MobileDataProcessor;
 import com.khadri.spring.core.csv.prepare.data.mobile.util.MobileFileUtil;
 
