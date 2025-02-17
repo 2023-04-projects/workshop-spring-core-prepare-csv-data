@@ -1,6 +1,7 @@
 package com.khadri.spring.core.csv.prepare.data.customer.util;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Arrays;
@@ -20,11 +21,11 @@ public class CustomerFileUtil {
 		System.out.println("===========> CUSTOMER CSV File Creation  STARTS ===========>");
 
 		try {
-
 			customerFile = (File) applicationContext.getBean("customerFile");
 			printWriter = (PrintWriter) applicationContext.getBean("printWriterCustomer");
 
 			boolean isNewFile = customerFile.createNewFile();
+			printWriter = new PrintWriter(new FileWriter(customerFile, true));
 
 			if (isNewFile) {
 				System.out.println("File is new, writing header...");
