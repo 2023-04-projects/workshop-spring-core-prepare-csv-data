@@ -1,7 +1,6 @@
 package com.khadri.spring.core.csv.prepare.data.employee.util;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Arrays;
@@ -16,14 +15,14 @@ import io.vavr.Tuple2;
 public class EmployeeFileUtil {
 	private static PrintWriter printWriter;
 	private static File employeeFile;
-
+	
 	public static Tuple2<File, PrintWriter> employeeCsvFilePrintWriter(ApplicationContext applicationContext) {
 		System.out.println("===========> Employee CSV File Creation  STARTS ===========>");
 		try {
 			employeeFile = (File) applicationContext.getBean("employeeFile");
+			printWriter=(PrintWriter) applicationContext.getBean("printWriterEmployee");
 			boolean isNewFile = employeeFile.createNewFile();
-			printWriter = new PrintWriter(new FileWriter(employeeFile, true));
-
+			
 			if (isNewFile) {
 				System.out.println("File is new, writing header...");
 				Arrays.stream(EmployeeCsvHeaders.values()).forEach(eachHeader -> {
