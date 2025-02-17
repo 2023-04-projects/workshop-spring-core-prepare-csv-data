@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Configuration;
 import com.khadri.spring.core.csv.prepare.data.customer.processor.CustomerDataProcessor;
 import com.khadri.spring.core.csv.prepare.data.employee.processor.EmployeeDataProcessor;
 import com.khadri.spring.core.csv.prepare.data.movie.processor.MovieDataProcessor;
+import com.khadri.spring.core.csv.prepare.data.supermarket.processor.SupermarketDataProcessor;
 
 @Configuration
 public class AppConfig {
@@ -38,6 +39,13 @@ public class AppConfig {
 		String movieFilePath = "src/main/resources/movie.csv";
 		return new File(movieFilePath);
 	}
+	
+	@Bean("superMarketFile")
+	public File superMarketFile() {
+		String path = "src/main/resources/supermarket.csv";
+		return new File(path);
+
+	}
 
 
 	@Bean
@@ -59,6 +67,12 @@ public class AppConfig {
 	}
 
 	@Bean
+	public PrintWriter superMarketPrintWriter(@Qualifier("superMarketFile")File superMarketFile) throws Exception {
+		FileWriter fileWriter = new FileWriter(superMarketFile, true);
+		return new PrintWriter(fileWriter);
+	}
+
+	@Bean
 	public EmployeeDataProcessor employeeDataProcessor() {
 		return new EmployeeDataProcessor(scanner());
 	}
@@ -73,4 +87,8 @@ public class AppConfig {
 		return new MovieDataProcessor(scanner());
 	}
 
+	@Bean
+	public SupermarketDataProcessor superMarketDataProcessor(Scanner scanner) {
+		return new SupermarketDataProcessor(scanner);
+	}
 }
