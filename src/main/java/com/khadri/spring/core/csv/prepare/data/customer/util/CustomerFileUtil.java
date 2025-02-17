@@ -22,8 +22,9 @@ public class CustomerFileUtil {
 
 		try {
 			customerFile = (File) applicationContext.getBean("customerFile");
+			printWriter=(PrintWriter) applicationContext.getBean("printWriterCustomer");
+
 			boolean isNewFile = customerFile.createNewFile();
-			printWriter = new PrintWriter(new FileWriter(customerFile, true));
 			
 			if (isNewFile) {
 				System.out.println("File is new, writing header...");
