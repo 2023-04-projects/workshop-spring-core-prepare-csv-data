@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 import org.springframework.context.ApplicationContext;
 
-import com.khadri.spring.core.csv.prepare.data.constants.MobileCsvHeaders;
+import com.khadri.spring.core.csv.prepare.data.mobile.constants.MobileCsvHeaders;
 
 import io.vavr.Tuple;
 import io.vavr.Tuple2;

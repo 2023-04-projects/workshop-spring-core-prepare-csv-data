@@ -1,4 +1,4 @@
-package com.khadri.spring.core.csv.prepare.data.constants;
+package com.khadri.spring.core.csv.prepare.data.mobile.constants;
 
 public enum MobileCsvHeaders {
 
