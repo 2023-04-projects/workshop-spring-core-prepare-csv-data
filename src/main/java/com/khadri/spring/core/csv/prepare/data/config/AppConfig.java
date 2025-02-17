@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.khadri.spring.core.csv.prepare.data.customer.processor.CustomerDataProcessor;
 import com.khadri.spring.core.csv.prepare.data.employee.processor.EmployeeDataProcessor;
+import com.khadri.spring.core.csv.prepare.data.mobile.processor.MobileDataProcessor;
 import com.khadri.spring.core.csv.prepare.data.movie.processor.MovieDataProcessor;
 
 @Configuration
@@ -19,6 +20,12 @@ public class AppConfig {
 	@Bean
 	public Scanner scanner() {
 		return new Scanner(System.in);
+	}
+
+	@Bean("mobileFile")
+	public File mobileFile() {
+		String path = "src/main/resources/mobile.csv";
+		return new File(path);
 	}
 
 	@Bean("employeeFile")
@@ -39,6 +46,11 @@ public class AppConfig {
 		return new File(movieFilePath);
 	}
 
+	@Bean
+	public PrintWriter printWriterMobile(@Qualifier("mobileFile") File mobileFile) throws Exception {
+		FileWriter fileWriter = new FileWriter(mobileFile, true);
+		return new PrintWriter(fileWriter);
+	}
 
 	@Bean
 	public PrintWriter printWriterEmployee(@Qualifier("employeeFile") File employeeFile) throws IOException {
@@ -52,10 +64,14 @@ public class AppConfig {
 		return new PrintWriter(fileWriter);
 	}
 
-	@Bean
 	public PrintWriter printWriterCustomer(@Qualifier("customerFile") File customerFile) throws IOException {
 		FileWriter fileWriter = new FileWriter(customerFile, true);
 		return new PrintWriter(fileWriter);
+	}
+
+	@Bean
+	public MobileDataProcessor mobileDataProcessor() {
+		return new MobileDataProcessor(scanner());
 	}
 
 	@Bean
@@ -72,5 +88,4 @@ public class AppConfig {
 	public MovieDataProcessor movieDataProcessor() {
 		return new MovieDataProcessor(scanner());
 	}
-
 }

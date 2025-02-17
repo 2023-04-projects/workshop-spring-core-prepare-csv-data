@@ -16,6 +16,7 @@
 			<artifactId>spring-context</artifactId>
 			<version>6.1.2</version>
 		</dependency>
+
 		<dependency>
 			<groupId>io.vavr</groupId>
 			<artifactId>vavr</artifactId>
