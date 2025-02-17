@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -18,14 +19,20 @@ public class AppConfig {
 		return new Scanner(System.in);
 	}
 
-	@Bean
+	@Bean("customerFile")
 	public File customerFile() {
-		return new File("src/main/resources/customer.csv");
+		String path = "src/main/resources/customer.csv";
+		return new File(path);
 	}
 
 	@Bean
 	public PrintWriter printWriter(File file) throws Exception {
 		FileWriter fileWriter = new FileWriter(file, true);
+		return new PrintWriter(fileWriter);
+	}
+	@Bean
+	public PrintWriter printWriterCustomer(@Qualifier("customerFile")File customerFile) throws Exception {
+		FileWriter fileWriter = new FileWriter(customerFile, true);
 		return new PrintWriter(fileWriter);
 	}
 

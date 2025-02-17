@@ -22,7 +22,7 @@ public class CustomerFileUtil {
 		try {
 
 			customerFile = (File) applicationContext.getBean("customerFile");
-			printWriter = (PrintWriter) applicationContext.getBean("printWriter");
+			printWriter = (PrintWriter) applicationContext.getBean("printWriterCustomer");
 
 			boolean isNewFile = customerFile.createNewFile();
 
