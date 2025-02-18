@@ -16,6 +16,8 @@ import com.khadri.spring.core.csv.prepare.data.employee.processor.EmployeeDataPr
 import com.khadri.spring.core.csv.prepare.data.employee.util.EmployeeFileUtil;
 import com.khadri.spring.core.csv.prepare.data.movie.processor.MovieDataProcessor;
 import com.khadri.spring.core.csv.prepare.data.movie.util.MovieFileUtil;
+import com.khadri.spring.core.csv.prepare.data.supermarket.processor.SupermarketDataProcessor;
+import com.khadri.spring.core.csv.prepare.data.supermarket.util.SuperMarketFileUtil;
 
 import io.vavr.Tuple2;
 
@@ -24,6 +26,7 @@ public class CsvDataDriver {
 	private static CustomerDataProcessor customerDataProcessor;
 	private static EmployeeDataProcessor employeeDataProcessor;
 	private static MovieDataProcessor movieDataProcessor;
+	private static SupermarketDataProcessor superMarketDataProcessor;
 	private static Scanner scanner;
 	private static CsvDataDriver csvDriver;
 	private static ApplicationContext applicationContext;
@@ -34,6 +37,7 @@ public class CsvDataDriver {
 		employeeDataProcessor = applicationContext.getBean(EmployeeDataProcessor.class);
 		customerDataProcessor = applicationContext.getBean(CustomerDataProcessor.class);
 		movieDataProcessor = applicationContext.getBean(MovieDataProcessor.class);
+		superMarketDataProcessor = applicationContext.getBean(SupermarketDataProcessor.class);
 	}
 
 	public static void main(String[] args) {
@@ -89,6 +93,30 @@ public class CsvDataDriver {
 				tupleFilePW2._2.close();
 			}
 			break;
+			
+		case 4:
+
+			Tuple2<File, PrintWriter> tupleFilePW4 = SuperMarketFileUtil.superMarketCsvFilePrintWriter(applicationContext);
+
+			try {
+				System.out.println("How Many Records Do You Want ? : ");
+				int records4 = scanner.nextInt();
+
+				for (int i = 1; i <= records4; i++) {
+					superMarketDataProcessor.process(tupleFilePW4._2, i);
+				}
+
+			} catch (Exception e) {
+				System.out.println("Exception Occured " + e.getCause());
+			} finally {
+				System.out.println("The remaining records were inserted into file.");
+				
+				tupleFilePW4._2.flush();
+				tupleFilePW4._2.close();
+			}
+
+			break;
+
 
 		case 5:
 			Tuple2<File, PrintWriter> tupleFilePW5 = MovieFileUtil.movieCsvFilePrintWriter(applicationContext);

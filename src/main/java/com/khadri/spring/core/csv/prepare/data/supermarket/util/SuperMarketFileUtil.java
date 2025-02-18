@@ -1,0 +1,66 @@
+package com.khadri.spring.core.csv.prepare.data.supermarket.util;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Arrays;
+
+import org.springframework.context.ApplicationContext;
+
+import com.khadri.spring.core.csv.prepare.data.supermarket.constant.SuperMarkeCsvHeader;
+
+import io.vavr.Tuple;
+import io.vavr.Tuple2;
+
+public class SuperMarketFileUtil {
+
+	private static PrintWriter pw;
+	private static File superMarketFile;
+
+	public static Tuple2<File, PrintWriter> superMarketCsvFilePrintWriter(ApplicationContext applicationContext) {
+		System.out.println("===========>  SUPERMARKET CSV File Creation  STARTS ===========>");
+
+		try {
+			
+			superMarketFile = (File) applicationContext.getBean("superMarketFile");
+		
+			boolean isNewFile = superMarketFile.createNewFile();
+			
+			pw = (PrintWriter) applicationContext.getBean("superMarketPrintWriter");
+
+			if (isNewFile) {
+				System.out.println("File is new, Writing header ...! ");
+				Arrays.stream(SuperMarkeCsvHeader.values()).forEach(eachHeader -> {
+					pw.print(eachHeader.name());
+					pw.print(",");
+				});
+				pw.println();
+			} else {
+				System.out.println("File already exists, skipping Header");
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		System.out.println("Process of File creation In Progress");
+		try {
+			for (int i = 0; i < 1; i++) {
+				Thread.sleep(1000);
+				System.out.print("=>");
+			}
+		} catch (Exception e) {
+			System.out.println("never comes");
+		}
+
+		System.out.println("File Name : " + superMarketFile.getName() + " Created At : " + superMarketFile.getPath());
+		System.out.println("<=========== SUPERMARKET CSV File Creation ENDS <===========");
+
+		System.out.println("===========> SUPERMARKET HEADER ROW WRITING INTO CSV File STARTS ===========>");
+
+		System.out.println("Process of Writing Headers into : " + superMarketFile.getName());
+
+		System.out.println(" <=========== SUPERMARKET HEADER ROW WRITING INTO CSV FILE ENDS <===========");
+		return Tuple.of(superMarketFile, pw);
+	}
+}
