@@ -63,7 +63,6 @@ public class CsvDataDriver {
 		switch (dataProcessId) {
 
 		case 6:
-			MobileDataProcessor mobileProcessor = new MobileDataProcessor(scanner);
 			Tuple2<File, PrintWriter> tupleFilePW6 = MobileFileUtil.mobileCsvFilePrintWriter(applicationContext);
 			try {
 				System.out.println(" How many records you want to enter ?  : ");
